@@ -16,10 +16,88 @@ public class jdbcdemo1 extends HttpServlet{
 
 @Override
     public  void doGet(HttpServletRequest arg0, HttpServletResponse arg1) throws IOException {
-        testjdbc();
+//        testjdbc();//数据库连接，使用statement
+//        testpreparedSta();//preparedstatement
+        sqlInjection();//sql注入
 }
 
+/**
+ * sql注入
+ */
+    public  void  sqlInjection() throws  IOException{
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String airline = "ee'OR id = ";
+        String id =" OR '1'='1" ;
+        String sql = "SELECT * FROM `union_protocol` WHERE airline ='" +airline + "'and id = '"+id+"'";
 
+
+        //
+        try {
+
+            connection = getConnection();
+            statement = connection.createStatement();
+            resultSet =statement.executeQuery(sql);//executeQuery中插入的SQL只能是select
+            if(resultSet.next())
+                System.out.println("congratulation");
+            else
+                System.out.println("SORRY");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            release(connection,statement,resultSet);
+        }
+
+    }
+
+
+    /**
+ * preparedstatement
+ */
+    public  void  testpreparedSta() throws  IOException{
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        String sql = null;
+
+        try {
+            connection = getConnection();
+            sql = "SELECT  * FROM  union_protocol where id <= ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,10);
+//            preparedStatement.setString(2,"MU");
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                int id = resultSet.getInt(1);
+                String airline = resultSet.getString("airline");
+
+                System.out.println("---------"+id+airline);
+            }
+
+            sql = "UPDATE  union_protocol  SET  airline=? ,union_airline_amount=?  WHERE  id = 1;";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,"MU");
+            preparedStatement.setInt(2,151);
+            preparedStatement.executeUpdate();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            release(connection,preparedStatement,resultSet);
+        }
+
+    }
+
+    /**
+     * 利用statement进行SQL操作
+     * @throws IOException
+     */
     public  void testjdbc() throws IOException {
         Connection connection = null;
         Statement statement = null;
@@ -38,8 +116,6 @@ public class jdbcdemo1 extends HttpServlet{
              connection = getConnection();
              statement = connection.createStatement();
              resultSet =statement.executeQuery(sql);//executeQuery中插入的SQL只能是select
-//             statement.executeUpdate(sql2);//* 2). 通过 executeUpdate(sql) 可以执行 SQL 语句.* 3). 传入的 SQL 可以是 INSRET, UPDATE 或 DELETE. 但不能是 SELECT
-
              while (resultSet.next()){
                  int id = resultSet.getInt(1);
                  String airline = resultSet.getString("airline");
@@ -50,6 +126,11 @@ public class jdbcdemo1 extends HttpServlet{
                  System.out.println(create_gmt);
 
              }
+            /**
+             * //* 2). 通过 executeUpdate(sql) 可以执行 SQL 语句.
+             * * 3). 传入的 SQL 可以是 INSRET, UPDATE 或 DELETE. 但不能是 SELECT
+             */
+            statement.executeUpdate(sql2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +143,13 @@ public class jdbcdemo1 extends HttpServlet{
     }
 
 
-
+    /**
+     * 创建数据库连接
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws IOException
+     */
     public Connection getConnection() throws ClassNotFoundException, SQLException ,IOException{
         //1.从配置文件中获取数据库连接配置信息
 
@@ -98,6 +185,12 @@ public class jdbcdemo1 extends HttpServlet{
         return connection;
     }
 
+    /**
+     * 释放数据库连接资源
+     * @param conn
+     * @param sta
+     * @param res
+     */
     public  void  release(Connection conn,Statement sta,ResultSet res){
 /**
  *  * 2. Connection、Statement 都是应用程序和数据库服务器的连接资源. 使用后一定要关闭.

@@ -67,7 +67,6 @@ public class jdbcdemo1 extends HttpServlet{
             connection = getConnection();
             sql = "SELECT  * FROM  union_protocol where id <= ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,10);
 //            preparedStatement.setString(2,"MU");
             resultSet = preparedStatement.executeQuery();
 
@@ -95,7 +94,7 @@ public class jdbcdemo1 extends HttpServlet{
     }
 
     /**
-     * 利用statement进行SQL操作
+     * statement
      * @throws IOException
      */
     public  void testjdbc() throws IOException {
@@ -142,14 +141,14 @@ public class jdbcdemo1 extends HttpServlet{
 
     }
 
-
     /**
-     * 创建数据库连接
+     * 获取数据库连接
      * @return
      * @throws ClassNotFoundException
      * @throws SQLException
      * @throws IOException
      */
+
     public Connection getConnection() throws ClassNotFoundException, SQLException ,IOException{
         //1.从配置文件中获取数据库连接配置信息
 
@@ -185,8 +184,9 @@ public class jdbcdemo1 extends HttpServlet{
         return connection;
     }
 
+
     /**
-     * 释放数据库连接资源
+     * 释放数据库连接
      * @param conn
      * @param sta
      * @param res

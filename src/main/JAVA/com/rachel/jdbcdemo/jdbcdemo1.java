@@ -67,7 +67,7 @@ public class jdbcdemo1 extends HttpServlet{
             connection = getConnection();
             sql = "SELECT  * FROM  union_protocol where id <= ?";
             preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setString(2,"MU");
+            preparedStatement.setString(2,"MU");
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){

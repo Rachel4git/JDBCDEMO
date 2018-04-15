@@ -55,6 +55,46 @@ public class daodemo1 {
 
     //update
     public  static  void update(){
+//        批量处理
+        Connection conn = null;
+        PreparedStatement pre = null;
+        ResultSet res = null;
+        try {
+            conn = getConnection();
+            conn.setAutoCommit(false);
+            String sql = "INSERT INTO  `tb_member2` (NAME,sex) VALUES (?,?)";
+            pre =conn.prepareStatement(sql);
+//            计时开始
+            long begin = System.currentTimeMillis();
+            for(int i=0;i<1000;i++){
+
+                pre.setObject(1,"lili"+i+1);
+                pre.setObject(2,0);
+//                pre.executeUpdate();//67896；
+                pre.addBatch();//81615
+                if((i+1)%200==0){
+                    pre.executeBatch();
+                    pre.clearBatch();
+//                    System.out.println("--------"+i);
+                }
+
+            }
+//            计时结束
+            long end =System.currentTimeMillis();
+//            输出时间
+            System.out.println("time = "+(end-begin));
+            conn.commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        } finally {
+            release(conn,pre,res);
+        }
 
     }
     //查询一条记录

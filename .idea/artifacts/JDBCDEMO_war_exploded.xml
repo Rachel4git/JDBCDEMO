@@ -11,6 +11,8 @@
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.6" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.0" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:2.0" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -1,13 +1,7 @@
 package com.rachel.jdbcdemo;
 
-import com.mysql.jdbc.*;
-
 import java.io.IOException;
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 
 
 /**

@@ -15,4 +15,13 @@ public class connectpooldemo1Test {
     public  void  getDBCPConn1() throws Exception {
         new connectpooldemo1().getDBCPConn1();
     }
+
+    @Test
+    public  void  getC3P0(){
+        new connectpooldemo1().getC3P0();
+    }
+    @Test
+    public  void  getC3P01(){
+        new connectpooldemo1().getC3P01();
+    }
 }

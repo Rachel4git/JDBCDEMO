@@ -58,7 +58,7 @@ public  void testquery6() throws Exception{
 
     try {
         conn = getC3P0();
-        Object obj = queryRunner.query(conn, sql, new ScalarHandler<>("union_airline_amount"));//返回指定列名或列索引的值
+        Object obj = queryRunner.query(conn, sql, new ScalarHandler("union_airline_amount"));//返回指定列名或列索引的值
         System.out.println(obj);
     } catch (Exception e) {
         e.printStackTrace();
@@ -106,7 +106,7 @@ public  void testquery4() throws Exception{
 
     try {
         conn = getC3P0();
-        Object obj = queryRunner.query(conn, sql, new BeanListHandler(unionprotocol.class));//获取不到ID和airline
+        Object obj = queryRunner.query(conn, sql, new BeanListHandler<>(unionprotocol.class));//获取不到ID和airline
         System.out.println(obj);
     } catch (Exception e) {
         e.printStackTrace();
@@ -118,12 +118,12 @@ public  void testquery4() throws Exception{
 //  beanhandler，返回结果集第一条记录对应的对象
     public  void testquery2() throws Exception{
         QueryRunner queryRunner = new QueryRunner();
-        String sql = "select * from union_protocol where id =5";
+        String sql = "select * from union_protocol where id <5";
         Connection conn = null;
 
         try {
             conn = getC3P0();
-            Object obj = queryRunner.query(conn, sql, new BeanHandler(unionprotocol.class));//获取不到ID和airline
+            Object obj = queryRunner.query(conn, sql, new BeanHandler<>(unionprotocol.class));//获取不到ID和airline
             System.out.println(obj);
         } catch (Exception e) {
             e.printStackTrace();

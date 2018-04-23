@@ -146,7 +146,7 @@ public  void testquery4() throws Exception{
                 public Object handle(ResultSet rs) throws SQLException {
                     List<unionprotocol> ll = new ArrayList<>();
                     while (rs.next()){
-                        int id = rs.getInt(1);
+                        long id = rs.getInt(1);
                         String airline = rs.getString(2);
                         int union_airline_amount = rs.getInt(3);
                         String union_airlines = rs.getString(4);

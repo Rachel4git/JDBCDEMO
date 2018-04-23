@@ -6,7 +6,7 @@ package com.rachel.jdbcdemo;
 public class unionprotocol {
 
         // ��ˮ��
-        private long id;
+        private Long id;
         // ���Ե�����
         private String airline;
         // ���֤��
@@ -23,9 +23,20 @@ public class unionprotocol {
             return id;
         }
 
-        public void setId(int id) {this.id = id;}
+        public void setId(Long id) {
+            this.id = id;
+        }
 
-        public String getAIRLINE() {
+
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+
+    public String getAIRLINE() {
         return airline;
     }
 
@@ -78,7 +89,7 @@ public class unionprotocol {
         public unionprotocol() {
             // TODO Auto-generated constructor stub
         }
-        public unionprotocol(int id,String airline,int union_airline_amount ,String union_airlines) {
+        public unionprotocol(Long id,String airline,int union_airline_amount ,String union_airlines) {
             this.id = id;
             this.airline=airline;
             this.union_airline_amount = union_airline_amount;

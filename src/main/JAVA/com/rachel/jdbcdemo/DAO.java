@@ -14,7 +14,7 @@ public interface DAO<T> {
      */
 //    query
 //    queryvalue
-    public  <E> E queryvalue (Connection conn, String sql, Object ...args)throws SQLException;
+    public  <E> E queryvalue (Connection conn, String sql, T ...args)throws SQLException;
 //    queryall
     public List<T> queryall(Connection conn, String sql,Object ...args) throws SQLException;
 //    queryone

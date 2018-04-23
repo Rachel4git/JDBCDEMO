@@ -18,6 +18,6 @@ public class dbutilsdemo1Test {
 
     @Test
     public  void  testquery2() throws  Exception{
-        new dbutilsdemo1().testquery3();
+        new dbutilsdemo1().testquery2();
     }
 }

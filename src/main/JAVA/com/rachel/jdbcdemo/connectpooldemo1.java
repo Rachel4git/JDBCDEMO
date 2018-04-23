@@ -55,7 +55,8 @@ public class connectpooldemo1 {
      </dependency>
      * @return
      */
-    public  void getC3P0(){
+    public  static Connection getC3P0(){
+        Connection conn = null;
         ComboPooledDataSource cpds = new ComboPooledDataSource();
         cpds.setUser("TCFlyIntOAG");
         cpds.setPassword("nKL39Q2iOD94sxSgqlzL");
@@ -73,10 +74,12 @@ public class connectpooldemo1 {
         cpds.setMaxStatementsPerConnection(5);
 
         try {
-            System.out.println(cpds.getConnection());
+             conn = cpds.getConnection();
+//            System.out.println(cpds.getConnection());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return conn;
     }
 
     //DBCP数据库连接池

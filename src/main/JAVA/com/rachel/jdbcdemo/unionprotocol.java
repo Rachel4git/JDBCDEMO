@@ -25,11 +25,11 @@ public class unionprotocol {
 
         public void setId(int id) {this.id = id;}
 
-        public String getAriline() {
+        public String getAIRLINE() {
         return airline;
     }
 
-        public  void  setAriline(String airline){ this.airline= airline;}
+        public  void  setAIRLINE(String airline){ this.airline= airline;}
 
         public int getUnion_airline_amount() {
             return union_airline_amount;
@@ -78,6 +78,14 @@ public class unionprotocol {
         public unionprotocol() {
             // TODO Auto-generated constructor stub
         }
+        public unionprotocol(int id,String airline,int union_airline_amount ,String union_airlines) {
+            this.id = id;
+            this.airline=airline;
+            this.union_airline_amount = union_airline_amount;
+            this.union_airlines=union_airlines;
+
+        // TODO Auto-generated constructor stub
+    }
 
         @Override
         public String toString() {
